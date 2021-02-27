@@ -4,8 +4,110 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d4430376711776f7ec4d70e99130dcb1",
+    "content-hash": "4a0a7e2c7ff98cf06cdd4c75f0d665c0",
     "packages": [
+        {
+            "name": "alymosul/exponent-server-sdk-php",
+            "version": "v1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Alymosul/exponent-server-sdk-php.git",
+                "reference": "c3fec550e2c0c0e6dea94866a122c93d97915f03"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Alymosul/exponent-server-sdk-php/zipball/c3fec550e2c0c0e6dea94866a122c93d97915f03",
+                "reference": "c3fec550e2c0c0e6dea94866a122c93d97915f03",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ExponentPhpSDK\\": "lib"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Aly Suleiman",
+                    "email": "alymosul@gmail.com"
+                }
+            ],
+            "description": "Server-side library for working with Expo push notifications using PHP",
+            "keywords": [
+                "expo",
+                "exponent",
+                "notifications",
+                "push"
+            ],
+            "support": {
+                "issues": "https://github.com/Alymosul/exponent-server-sdk-php/issues",
+                "source": "https://github.com/Alymosul/exponent-server-sdk-php/tree/master"
+            },
+            "time": "2019-01-18T13:18:59+00:00"
+        },
+        {
+            "name": "alymosul/laravel-exponent-push-notifications",
+            "version": "2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Alymosul/laravel-exponent-push-notifications.git",
+                "reference": "ad1c05199b1558e07146c8ace5a61d4be47b76ee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Alymosul/laravel-exponent-push-notifications/zipball/ad1c05199b1558e07146c8ace5a61d4be47b76ee",
+                "reference": "ad1c05199b1558e07146c8ace5a61d4be47b76ee",
+                "shasum": ""
+            },
+            "require": {
+                "alymosul/exponent-server-sdk-php": "1.1.*",
+                "laravel/framework": "^5.6 | ^6.0 | ^7.0 | ^8.0",
+                "php": "^7.1.3"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.5",
+                "orchestra/testbench": "~3.3||~4.0",
+                "phpunit/phpunit": "~5.4||~5.7||~6.0||^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "NotificationChannels\\ExpoPushNotifications\\ExpoPushNotificationsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "NotificationChannels\\ExpoPushNotifications\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Aly Suleiman",
+                    "email": "alymosul@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Exponent push notifications driver for laravel",
+            "homepage": "https://github.com/alymosul/laravel-exponent-push-notifications",
+            "support": {
+                "issues": "https://github.com/Alymosul/laravel-exponent-push-notifications/issues",
+                "source": "https://github.com/Alymosul/laravel-exponent-push-notifications/tree/2.2.0"
+            },
+            "time": "2020-09-27T20:38:12+00:00"
+        },
         {
             "name": "asm89/stack-cors",
             "version": "v2.0.2",
@@ -7231,5 +7333,5 @@
         "php": "^7.2.5|^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.0.0"
 }
