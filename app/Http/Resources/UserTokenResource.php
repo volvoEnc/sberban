@@ -14,6 +14,8 @@ class UserTokenResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+          'token' => $this->api_token
+        ];
     }
 }
