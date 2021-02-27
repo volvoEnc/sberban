@@ -83,6 +83,8 @@ class UserController extends Controller
                 'uri' => $arServiceInfo['endpoints'][0]['url']
             ]);
         }
+        $user->sber_token = $response->header('X-Subject-Token');
+        $user->save();
         return true;
     }
 }
