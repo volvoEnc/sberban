@@ -16,7 +16,7 @@ class UserRequest extends ApiRequest
     {
         return [
             'login' => ['required', 'string'],
-            'password' => ['required', 'string', 'min:8']
+            'password' => ['required', 'string']
         ];
     }
 }
