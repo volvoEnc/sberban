@@ -15,7 +15,8 @@ class ServiceCountResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'serviceName' => $this->name,
+            'service_type' => $this->name,
+            'service_name' => $this->full_name,
             'count' => $this->countElements
         ];
     }

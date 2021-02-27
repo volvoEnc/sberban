@@ -17,13 +17,10 @@ class ServiceMethodCountUrls
             'countMethod' => 'total_count',
             'name' => 'Relational Database Service'
         ],
-        'cts' => [
-            'url' => '/clusters',
-            'countMethod' => 'count'
-        ],
-        'eip' => [
-            'url' => '/publicips',
-            'countMethod' => 'count'
-        ],
+        'evs' => [
+            'url' => '/cloudvolumes/detail',
+            'countMethod' => 'count',
+            'name' => 'Elastic Volume Service'
+        ]
     ];
 }
