@@ -4,17 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserRequest extends FormRequest
+class UserRequest extends ApiRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return false;
-    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -24,7 +15,8 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'login' => ['required', 'string', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'unique:users']
         ];
     }
 }

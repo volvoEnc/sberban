@@ -18,6 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/vovan', function () {
-    return response('ea');
-});
+Route::post('/login', 'UserController@login');
+Route::post('/login', 'UserController@register');
