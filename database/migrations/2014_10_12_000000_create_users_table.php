@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('login')->unique();
             $table->string('password');
             $table->string('api_token', 80)->nullable();
-            $table->string('sber_token', 255);
+            $table->string('sber_token', 255)->nullable();
             $table->timestamps();
         });
     }
