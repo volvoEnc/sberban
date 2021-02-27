@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Endpoint;
 use App\Http\Requests\UserRequest;
-use App\Http\Resources\UserCreateResource;
 use App\Http\Resources\UserTokenResource;
 use App\User;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
@@ -21,31 +20,43 @@ class UserController extends Controller
             ->first();
 
         if (!$user) {
-            $user = User::create($request->all());
+            $userLogin = User::query()
+                ->where('login', $request->login)
+                ->first();
+            if (!$userLogin) {
+                $user = User::create($request->all());
+            } else {
+                throw new HttpResponseException(response(null, 404));
+            }
         }
 
         /** @var $user User */
-        $this->getTokens($user);
+        $res = $this->getTokens($user);
+        if (!$res) {
+            throw new HttpResponseException(response(null, 404));
+        }
         $user->api_token = Str::random(64);
         $user->save();
 
         return new UserTokenResource($user);
     }
 
-    protected function getTokens(User $user)
+    protected function getTokens(User $user): bool
     {
         $response = Http::post(getenv('SBER_GET_TOKEN_URL'), [
-            'auth' => [
+            "auth" => [
                 'identity' => [
-                    'methods' => ['password'],
+                    'methods' => [
+                        'password'
+                    ],
                     'password' => [
                         'user' => [
-                            'name' => $user->login
+                            'name' => $user->login,
+                            'password' => $user->password,
+                            'domain' => [
+                                'name' => $user->login
+                            ]
                         ],
-                        'password' => $user->password,
-                        'domain' => [
-                            'name' => $user->login
-                        ]
                     ]
                 ],
                 'scope' => [
@@ -56,6 +67,22 @@ class UserController extends Controller
             ]
         ]);
 
-        dd($response);
+        if ($response->status() != 201) {
+            return false;
+        }
+
+        $endpoints = Endpoint::query()->where('user_id', $user->id)->get();
+        foreach ($endpoints as $endpoint) {
+            $endpoint->delete();
+        }
+
+        foreach ($response->json()['token']['catalog'] as $arServiceInfo) {
+            $endpoint = Endpoint::create([
+                'user_id' => $user->id,
+                'name' => $arServiceInfo['name'],
+                'uri' => $arServiceInfo['endpoints'][0]['url']
+            ]);
+        }
+        return true;
     }
 }

@@ -18,8 +18,11 @@ class CreateEndpointsTable extends Migration
             $table->foreignId('user_id');
             $table->string('uri');
             $table->string('name');
-            $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
+
+
     }
 
     /**
